@@ -1,5 +1,4 @@
 #!/bin/bash
-
 rm -Rf /vagrant/iso/boot
 mkdir -p /vagrant/iso/boot/grub
 

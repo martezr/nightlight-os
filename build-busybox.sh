@@ -1,14 +1,14 @@
 #!/bin/bash
 
-rm -Rf busybox-1.36.1
-rm -Rf initramfs
+if [ ! -d /root/busybox-1.36.1 ]; then
+  echo "Directory does not exists."
+  curl https://busybox.net/downloads/busybox-1.36.1.tar.bz2 | tar xjf -
+fi
 
-curl https://busybox.net/downloads/busybox-1.36.1.tar.bz2 | tar xjf -
+rm -Rf /root/initramfs
 
-cd busybox-1.36.1
-
-#cp /vagrant/busyb-mini.config .config
-cp /vagrant/busydefconfig .config
+cd /root/busybox-1.36.1
+cp /vagrant/configs/busybox/busydefconfig .config
 
 make -j 8
 
@@ -20,9 +20,7 @@ mkdir initramfs
 
 mkdir -p initramfs/bin initramfs/sbin initramfs/etc initramfs/proc initramfs/sys initramfs/dev initramfs/usr/bin initramfs/usr/sbin initramfs/opt initramfs/etc/init.d
 
-echo "Testing123" > initramfs/test.txt
-
-cp /vagrant/inittab ./initramfs/etc/
+#cp /vagrant/inittab ./initramfs/etc/
 cp /vagrant/binaries/* ./initramfs/bin
 
 cp -a busybox-1.36.1/_install/* ./initramfs

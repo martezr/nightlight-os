@@ -1,0 +1,6 @@
+.vagrant/
+bzImage
+initramfs.cpio.gz
+.DS_Store
+*.iso
+binaries/*
